@@ -12980,22 +12980,22 @@ end;
 task.spawn(C_199);
 -- Local-only shop ownership preview; no purchases, inventory edits, or equip bypass.
 do
-    local utils = G2L["19a"].Parent
+    local utils = G2L["101"]
     local toggle = Instance.new("TextButton")
     toggle.Name = "FakeOwnedPreview"
-    toggle.Text = "Shop preview: OFF"
+    toggle.Text = "Shop Preview: OFF"
     toggle.Size = UDim2.new(1, 0, 0, 30)
     toggle.BackgroundColor3 = Color3.fromRGB(213, 154, 192)
     toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
     toggle.Font = Enum.Font.FredokaOne
     toggle.TextScaled = true
-    toggle.LayoutOrder = 999
+    toggle.LayoutOrder = -100
     toggle.Parent = utils
     Instance.new("UICorner", toggle).CornerRadius = UDim.new(0, 5)
     getgenv().StarlightShopPreview = false
     toggle.MouseButton1Click:Connect(function()
         getgenv().StarlightShopPreview = not getgenv().StarlightShopPreview
-        toggle.Text = getgenv().StarlightShopPreview and "Shop preview: ON (visual only)" or "Shop preview: OFF"
+        toggle.Text = getgenv().StarlightShopPreview and "Shop Preview: ON (visual only)" or "Shop Preview: OFF"
     end)
 end
 
