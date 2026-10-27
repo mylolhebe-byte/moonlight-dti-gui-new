@@ -12373,6 +12373,53 @@ local script = G2L["ff"];
 	end)
 end;
 task.spawn(C_ff);
+-- Halloween 2026 additions to Free Stuff
+local halloweenItems = {
+    "H26 Alien Bodysuit",
+    "H26 Alien Antenna",
+    "H26 Alien Sleeves",
+    "H26 Alien Shoes",
+    "H26 Star Witch Top",
+    "H26 Star Witch Skirt",
+    "H26 Star Witch Legwear",
+    "H26 Star Witch Hat",
+}
+
+local freeStuffFrame = G2L["101"]
+for index, itemName in ipairs(halloweenItems) do
+    local button = Instance.new("TextButton")
+    button.Name = "H26Item" .. index
+    button.Text = itemName
+    button.TextWrapped = true
+    button.TextScaled = true
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    button.BackgroundTransparency = 0.5
+    button.FontFace = Font.new("rbxasset://fonts/families/FredokaOne.json")
+    button.Size = UDim2.new(1, 0, 0, 35)
+    button.LayoutOrder = 50 + index
+    button.Parent = freeStuffFrame
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 5)
+    corner.Parent = button
+
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 1.5
+    stroke.Color = Color3.fromRGB(255, 135, 206)
+    stroke.Parent = button
+
+    button.MouseButton1Up:Connect(function()
+        local remotes = game:GetService("ReplicatedStorage"):FindFirstChild("RemoteEvents")
+        local equip = remotes and remotes:FindFirstChild("EquipItem")
+        if equip and equip:IsA("RemoteEvent") then
+            equip:FireServer(itemName)
+        else
+            warn("EquipItem RemoteEvent is unavailable")
+        end
+    end)
+end
+
 -- StarterGui.Starlight.Main.Container.Categories.FreeStuff.EquipItems
 local function C_102()
 local script = G2L["102"];
@@ -12389,8 +12436,7 @@ local script = G2L["102"];
 		["EasterHuntDress"] = {"Checkered Easter Dress"},
 		["ClassicDress"] = {"^^Iconic Dress"},
 		KATSEYECode = {"KATSEYE Charm Necklace", "KATSEYE Charm Nails", "KATSEYE Charm Chain"},
-		TrollHead = {"Troll Head"},
-		HalloweenItems = {"H26 Alien Bodysuit, H26 Alien Antenna, H26 Alien Sleeves, H26 Alien Shoes, H26 Star Witch Top, H26 Star Witch Skirt, H26 Star Witch Hat, H26 Star Witch Legwear, Jester Bodysuit, Jester Mask, Jester Ruff, Sweet Screams Dress, Sweet Screams Purse, Sweet Screams Shoes, H26 Haunted Dress, H26 Lunar Werewolf Necklace, H26 Lunar Werewolf Bodysuit, H26 Lunar Werewolf Shoes, H26 Lunar Werewolf Jacket, "}
+		TrollHead = {"Troll Head"}
 	}
 	
 	for i, btn in script.Parent:GetChildren() do
